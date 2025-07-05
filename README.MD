@@ -262,3 +262,32 @@ Updates:
 Вот [ссылка](https://github.com/unbanan/test.git) на него, если он до сих пор приватный пожалуйста напишите, я открою.
 
 Telegram: https://t.me/JLEXA0
+
+Если запустить программу на ее собственном [репозитории](https://github.com/unbanan/mws-task.git) где в go.mod нет зависимостей, то мы получим следующий ожидаемый вывод:
+
+```txt
+    Module: mws-task
+    Go version: 1.22.2
+    Updates:
+```
+
+т. к. наш go.mod файл выглядит следующим образом:
+
+```go
+    module mws-task
+
+    go 1.22.2
+```
+
+# Запуск программы
+
+```Go version: 1.22.2```
+
+```Git version: 2.43.0```
+
+```sh
+git clone https://github.com/unbanan/mws-task.git
+cd mws-task
+go build
+./mws-task --link [URL TO YOUR REPO]
+```
