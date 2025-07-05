@@ -45,16 +45,8 @@ var goModData struct {
 	}
 }
 
-var lib struct {
-	Path    string
-	Version string
-	Update  *struct {
-		Version string
-	}
-}
-
 func checkUpdates(directory string) ([]byte, error) {
-	command := exec.Command("go", "list", "-u", "-m", "-json", "all")
+	command := exec.Command("go", "list", "-u", "-m", "all")
 	command.Dir = directory
 	return command.Output()
 }
@@ -100,11 +92,10 @@ func main() {
 		if line == "" {
 			continue
 		}
-		if err := json.Unmarshal([]byte(line), &lib); err != nil {
+		var tokens []string = strings.Split(string(line), " ")
+		if len(tokens) < 3 {
 			continue
 		}
-		if lib.Update != nil {
-			fmt.Printf("%s %s -> %s\n", lib.Path, lib.Version, lib.Update.Version)
-		}
+		fmt.Printf("\t%s %s -> %s\n", tokens[0], tokens[1], tokens[2])
 	}
 }
